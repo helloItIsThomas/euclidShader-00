@@ -1,0 +1,17 @@
+hello,
+
+what do i want to do?
+i would like to isolate the bits of this code that get ..... wait wtf am i doing
+
+this code currently breaks an image into a grid.
+it gets a single average color from each grid unit.
+for each grid unit, it returns information about that single average color.
+What do we do with that information?
+Let's start with single image mode.
+      This mode maps the brightness value to an x and y position on a sprite sheet.
+      This mapping happens in the single.frag file.
+
+What are we trying to do?
+      We are trying to take in an image, break it into a grid.
+
+      Now I am trying to replace the icon grid image with a regular image.
