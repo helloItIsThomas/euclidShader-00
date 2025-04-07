@@ -9,11 +9,7 @@ import { sv } from "./utils/variables.js";
 import { recalculateGrid } from "./utils/eventHandlers.js";
 import { loadSetupImages, updateSvgIcons } from "./utils/loadImages";
 import { draw } from "./rendering/draw.js";
-import { createInput } from "./utils/input";
-import { initializeLoadIcon, showLoadIcon } from "./utils/icons.js";
-import { downloadCanvas } from "./utils/utils.js";
 import { stopRecording } from "./utils/recording";
-import { createStatsGUI } from "./utils/stats.js";
 import { updateCellData } from "./imgProcessing/imageProcessing.js";
 
 let resizeAppToMe = document.getElementById("bodyRight");
@@ -45,20 +41,11 @@ async function mySetup() {
   });
   sv.ticker.stop();
 
-  createStatsGUI();
-  // sv.p.noCanvas();
-
-  initializeLoadIcon();
-  createInput();
-  showLoadIcon();
-
   await loadSetupImages();
 
   const passMeImgs = await recalculateGrid();
-  await updateSvgIcons();
   await updateCellData(passMeImgs);
 
-  // updateClock();
   sv.setupDone = true;
   sv.ticker.start();
 }
@@ -103,15 +90,11 @@ export const tick = async () => {
 };
 
 function render() {
-  sv.stats.begin();
-
   updateClock();
 
   if (sv.setupDone) {
     draw();
   }
-
-  sv.stats.end();
 }
 
 export async function updateClock() {

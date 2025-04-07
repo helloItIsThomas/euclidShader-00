@@ -9,14 +9,13 @@ import { createGraphicsForSingleImage } from "../rendering/createShapeGraphics";
 import { shaderRendering } from "../rendering/shaderRendering";
 import { updateSvgIcons } from "./loadImages";
 import { updateClock } from "../sketch";
-import { updateActiveImgBar } from "./eventHandlers";
+// import { updateActiveImgBar } from "./eventHandlers";
 export const gui = new dat.GUI({
   autoPlace: false,
 });
 
-var customContainer = document
-  .querySelector(".moveGUI")
-  .appendChild(gui.domElement);
+// var customContainer = document.querySelector(".moveGUI");
+// .appendChild(gui.domElement);
 
 export const sv = {
   pixiScreenshot: undefined,
@@ -224,7 +223,7 @@ colorController.onChange(async (value) => {
   if (value) sv.fillColor = sv.brandBlueConst;
   else sv.fillColor = "#000000";
   const passMeImgs = await recalculateGrid();
-  await updateActiveImgBar();
+  // await updateActiveImgBar();
   await updateSvgIcons();
   await updateCellData(passMeImgs);
 });
@@ -269,7 +268,7 @@ inputField.addEventListener("keydown", async (event) => {
           sv.gridResolution = 1;
         }
         const passMeImgs = await recalculateGrid();
-        await updateActiveImgBar();
+        // await updateActiveImgBar();
         await updateSvgIcons();
         await updateCellData(passMeImgs);
       }

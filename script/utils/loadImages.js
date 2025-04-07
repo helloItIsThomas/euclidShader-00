@@ -1,4 +1,4 @@
-import { updateActiveImgBar } from "./eventHandlers.js";
+// import { updateActiveImgBar } from "./eventHandlers.js";
 import { downloadCanvas } from "./utils.js";
 import { sv } from "./variables.js";
 
@@ -36,7 +36,7 @@ export async function loadSetupImages() {
     })
   );
 
-  updateActiveImgBar();
+  // updateActiveImgBar();
 }
 
 const loadASetupIcon = (path) => {

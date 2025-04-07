@@ -13,6 +13,7 @@ body {
   padding: 0;
   background-color: white;
 }
+
 body {
   box-sizing: border-box;
   margin: 0;
@@ -47,6 +48,8 @@ body {
   min-height: 50px;
   box-sizing: border-box;
   position: relative;
+  box-sizing: border-box;
+  border: 20px solid blue;
   /* position: absolute; */
   /* width: 2000px; */
   /* height: 2000px; */
@@ -342,14 +345,6 @@ body {
   transition: all 0.1s ease-in-out;
 }
 
-#statsDisplay {
-  /* display: none; */
-  position: absolute !important;
-
-  /* z-index: 2; */
-  /* top: 0; */
-}
-
 .dg.main ul .folder {
   border-top: 1px solid black !important;
 }
@@ -366,16 +361,6 @@ body {
   border-top: 2px solid black !important;
   color: #55d4ff !important;
   font-weight: bold;
-}
-
-#loadIconDiv {
-  position: absolute;
-  /* display: none; */
-  /* z-index: 10; */
-  left: 0;
-  top: 0;
-  background-color: rgba(255, 255, 255, 1);
-  display: block;
 }
 
 #arcCont {

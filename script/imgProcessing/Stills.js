@@ -1,5 +1,4 @@
 import { sv } from "../utils/variables.js";
-import { downloadCanvas } from "../utils/utils.js";
 import { getAveColor } from "../imgProcessing/getAveColor.js";
 
 export class Still {

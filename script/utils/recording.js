@@ -1,7 +1,7 @@
 import { tick } from "../sketch";
 import { Recorder } from "canvas-record";
 import { AVC } from "media-codecs";
-import { recalculateGrid, updateActiveImgBar } from "./eventHandlers";
+import { recalculateGrid } from "./eventHandlers";
 import { updateSvgIcons } from "./loadImages";
 import { updateCellData } from "../imgProcessing/imageProcessing";
 import { sv } from "./variables.js";
@@ -36,7 +36,7 @@ export async function startRecording() {
     document.getElementById("renderingScreen").style.display = "flex";
     await resizeAbsoluteContainerForRecording();
     const passMeImgs = await recalculateGrid("absoluteContainer");
-    await updateActiveImgBar();
+    // await updateActiveImgBar();
     await updateSvgIcons();
     await updateCellData(passMeImgs);
 
@@ -65,7 +65,7 @@ export async function stopRecording() {
 
     sv.pApp.resizeTo = bodyRight;
     const passMeImgs = await recalculateGrid();
-    await updateActiveImgBar();
+    // await updateActiveImgBar();
     await updateSvgIcons();
     await updateCellData(passMeImgs);
 
