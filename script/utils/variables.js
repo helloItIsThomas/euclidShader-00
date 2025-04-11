@@ -92,7 +92,6 @@ export const sv = {
   iconGraphic17: null,
   iconGraphic18: null,
   iconGraphic19: null,
-  singleImgIconPaths: null,
 
   cTex: null,
   sTex: null,

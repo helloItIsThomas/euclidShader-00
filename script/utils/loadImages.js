@@ -19,20 +19,11 @@ export async function loadSetupImages() {
     });
   };
 
-  sv.singleImgIconPaths = Array.from(
-    { length: 25 },
-    (_, i) => `/assets/brightnessSortedSVG/${i}.svg`
-  );
-
   const sourceImgPaths = ["/assets/frame6.png"];
   sv.totalSourceUploadNum = sourceImgPaths.length;
 
   sv.animUnderImgs = [];
 
-  await Promise.all(
-    sourceImgPaths.map(async (path, index) => {
-      const img = await loadASetupImage(path);
-      sv.animUnderImgs[index] = img;
-    })
-  );
+  const img = await loadASetupImage(sourceImgPaths);
+  sv.animUnderImgs[0] = img;
 }

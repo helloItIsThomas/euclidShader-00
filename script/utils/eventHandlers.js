@@ -6,7 +6,7 @@ import { gsap } from "gsap";
 export async function recalculateGrid(resizeTo = "bodyRight") {
   let _imgs = Array.isArray(sv.animUnderImgs)
     ? sv.animUnderImgs
-    : [sv.animUnderImgs]; // Ensure _imgs is always an array
+    : [sv.animUnderImgs];
 
   // Preprocess images
   const processedImages = _imgs.map((img) => {
