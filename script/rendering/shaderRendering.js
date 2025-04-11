@@ -120,7 +120,7 @@ export async function shaderRendering() {
     });
   }
   resources = {}; // Clears the object reference.
-  resources = createResources(noiseCanvas);
+  resources = createResources();
 
   let bTexes = [];
   bTexes = sv.stills.map((still) => {
@@ -188,41 +188,20 @@ export async function shaderRendering() {
   sv.sceneContainer.addChild(sv.triangleMesh);
 }
 
-function createResources(noiseCanvas) {
-  // Common properties for both modes
-  let noiseSrc = new ImageSource({ resource: noiseCanvas.canvas });
-  let noiseTex = new Texture({ source: noiseSrc });
-
+function createResources() {
   const commonResources = {
-    noiseTex: noiseTex.source,
     waveUniforms: {
       time: { value: 1.0, type: "f32" },
       vTime: { value: 1.0, type: "f32" },
-      tlThresh1: { value: sv.tlThresh1, type: "f32" },
-      tlThresh2: { value: sv.tlThresh2, type: "f32" },
-      tlThresh3: { value: sv.tlThresh3, type: "f32" },
-      vTlThresh1: { value: sv.tlThresh1, type: "f32" },
-      vTlThresh2: { value: sv.tlThresh2, type: "f32" },
-      vTlThresh3: { value: sv.tlThresh3, type: "f32" },
       vCellW: { value: sv.cellW, type: "f32" },
       vCellH: { value: sv.cellH, type: "f32" },
       cellW: { value: sv.cellW, type: "f32" },
       cellH: { value: sv.cellH, type: "f32" },
-      // manualScale: { value: 0.999, type: "f32" },
-      manualScale: { value: 1.05, type: "f32" },
       gridResolution: { value: sv.gridResolution, type: "f32" },
       rowCount: { value: sv.rowCount, type: "f32" },
       colCount: { value: sv.colCount, type: "f32" },
       vRowCount: { value: sv.rowCount, type: "f32" },
       vColCount: { value: sv.colCount, type: "f32" },
-      sD: { value: sv.params.sdU, type: "i32" },
-      sI: { value: sv.params.siU, type: "i32" },
-      cO: { value: sv.params.coU, type: "i32" },
-      clipDarkOutliers: { value: 0.0, type: "f32" },
-      clipLightOutliers: { value: 0.0, type: "f32" },
-      snappiness: { value: sv.snappiness, type: "f32" },
-      noiseLevel: { value: sv.noiseOffset, type: "f32" },
-      vNoiseLevel: { value: sv.noiseOffset, type: "f32" },
       vNoisyMin: { value: sv.noisyMin, type: "f32" },
       vNoisyMax: { value: sv.noisyMax, type: "f32" },
     },

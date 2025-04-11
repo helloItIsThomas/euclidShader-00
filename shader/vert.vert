@@ -6,19 +6,10 @@ in float aIndex;
 uniform float vRowCount;
 uniform float vColCount;
 uniform float vTime;
-uniform float manualScale;
-uniform float vNoiseLevel;
 uniform float vNoisyMin;
 uniform float vNoisyMax;
-uniform float clipDarkOutliers;
-uniform float clipLightOutliers;
-uniform int sD;
-uniform int sI;
-uniform int cO;
 uniform sampler2D bTex1;
 uniform sampler2D bTex2;
-uniform sampler2D noiseTex;
-uniform int numBTexes;
 
 uniform float vCellW;
 uniform float vCellH;
@@ -49,16 +40,6 @@ void main() {
     float indexFloat = aIndex * totalCells;
     float x = mod(indexFloat, colCount) / colCount;
     float y = floor(indexFloat / colCount) / rowCount;
-    vec2 bTexUV = vec2(x, y);
-    float noise = (texture2D(noiseTex, bTexUV).r) * vNoiseLevel;
-    vec4 bTexColor = texture2D(bTex1, bTexUV);
-    float brightness = bTexColor.r;
-
-    vec2 bTexUV2 = vec2(x, y);
-    // bTexUV2 = adjustUV(bTexUV2, bTex2AR);
-    vec4 bTexColor2 = texture2D(bTex2, bTexUV2);
-    vec4 testLerp = mix(bTexColor, bTexColor2, clock);
-    brightness = testLerp.r;
 
     float scale = 1.;
 

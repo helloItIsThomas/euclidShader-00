@@ -3,7 +3,6 @@ import { Still } from "./Stills.js";
 import { shaderRendering } from "../rendering/shaderRendering.js";
 import { createGraphicsForSingleImage } from "../rendering/createShapeGraphics.js";
 import { hideLoadIcon } from "../utils/icons.js";
-import { triangulateWithHoles } from "pixi.js";
 
 export async function updateCellData(_processedImgs) {
   sv.stills = [];
