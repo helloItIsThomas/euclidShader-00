@@ -2,7 +2,6 @@ import { sv } from "./variables.js";
 import { updateCellData } from "../imgProcessing/imageProcessing.js";
 import { fitImageToWindow, downloadCanvas } from "../utils/utils.js";
 import { gsap } from "gsap";
-import { updateSvgIcons } from "./loadImages.js";
 
 export async function recalculateGrid(resizeTo = "bodyRight") {
   let _imgs = Array.isArray(sv.animUnderImgs)
@@ -50,8 +49,6 @@ window.addEventListener("resize", () => {
 
   resizeTimeout = setTimeout(async () => {
     const passMeImgs = await recalculateGrid();
-    // await updateActiveImgBar();
-    await updateSvgIcons();
     await updateCellData(passMeImgs);
 
     resizingStarted = false; // Reset for next resize

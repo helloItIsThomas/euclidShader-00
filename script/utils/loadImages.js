@@ -35,46 +35,4 @@ export async function loadSetupImages() {
       sv.animUnderImgs[index] = img;
     })
   );
-
-  // updateActiveImgBar();
-}
-
-const loadASetupIcon = (path) => {
-  // this should return a vanilla canvas of an svg.
-  return new Promise((resolve, reject) => {
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-
-    let svgResolution = (sv.gridW / sv.gridResolution) * 2;
-
-    canvas.width = svgResolution;
-    canvas.height = svgResolution;
-
-    const img = new Image();
-    img.onload = () => {
-      if (sv.color) ctx.fillStyle = sv.brandBlueConst;
-      else ctx.fillStyle = "#000000";
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      ctx.globalCompositeOperation = "source-in";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.globalCompositeOperation = "source-over";
-
-      resolve(canvas);
-    };
-    img.onerror = (err) => {
-      console.log("Error loading SVG: " + err);
-      reject(err);
-    };
-    img.src = path;
-  });
-};
-
-export async function updateSvgIcons() {
-  sv.singleImgIcons = [];
-  await Promise.all(
-    sv.singleImgIconPaths.map(async (path) => {
-      const icon = await loadASetupIcon(path);
-      sv.singleImgIcons.push(icon);
-    })
-  );
 }

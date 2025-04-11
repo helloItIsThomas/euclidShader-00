@@ -7,7 +7,7 @@ import { Recorder, RecorderStatus, Encoders } from "canvas-record";
 
 import { sv } from "./utils/variables.js";
 import { recalculateGrid } from "./utils/eventHandlers.js";
-import { loadSetupImages, updateSvgIcons } from "./utils/loadImages";
+import { loadSetupImages } from "./utils/loadImages";
 import { draw } from "./rendering/draw.js";
 
 import { updateCellData } from "./imgProcessing/imageProcessing.js";

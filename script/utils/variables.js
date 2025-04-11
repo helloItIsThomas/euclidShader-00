@@ -1,9 +1,4 @@
 import * as dat from "dat.gui";
-import { recalculateGrid } from "./eventHandlers";
-import { updateCellData } from "../imgProcessing/imageProcessing";
-import { downloadCanvas } from "./utils";
-import { updateSvgIcons } from "./loadImages";
-import { updateClock } from "../sketch";
 
 export const gui = new dat.GUI({
   autoPlace: false,
