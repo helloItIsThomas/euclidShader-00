@@ -1,8 +1,6 @@
 import { sv } from "../utils/variables.js";
-import { downloadCanvas, getAspectRatio } from "../utils/utils.js";
 
 import {
-  Assets,
   Buffer,
   BufferUsage,
   Mesh,
@@ -10,7 +8,6 @@ import {
   Geometry,
   Texture,
   ImageSource,
-  GlProgram,
   Container,
 } from "pixi.js";
 
@@ -18,15 +15,13 @@ async function loadFragShader() {
   const vertexLoader = import.meta.glob("../../shader/vert.vert", {
     as: "raw",
   });
-  const fragmentLoader = sv.oneActiveImage
-    ? import.meta.glob("../../shader/single.frag", { as: "raw" })
-    : import.meta.glob("../../shader/mult.frag", { as: "raw" });
+  const fragmentLoader = import.meta.glob("../../shader/single.frag", {
+    as: "raw",
+  });
 
   const [vertex, fragment] = await Promise.all([
     vertexLoader["../../shader/vert.vert"](),
-    sv.oneActiveImage
-      ? fragmentLoader["../../shader/single.frag"]()
-      : fragmentLoader["../../shader/mult.frag"](),
+    fragmentLoader["../../shader/single.frag"](),
   ]);
 
   return { vertex, fragment };
@@ -122,44 +117,6 @@ export async function shaderRendering() {
   resources = {}; // Clears the object reference.
   resources = createResources();
 
-  let bTexes = [];
-  bTexes = sv.stills.map((still) => {
-    let src = new ImageSource({ resource: still.brightnessTex });
-    let tex = new Texture({ source: src });
-
-    return tex;
-  });
-
-  resources.waveUniforms.numBTexes = { value: bTexes.length, type: "i32" };
-
-  if (bTexes.length == 1) {
-    resources["bTex1"] = bTexes[0].source;
-    resources["bTex2"] = bTexes[0].source;
-
-    resources.waveUniforms.bTex1AR = {
-      value: getAspectRatio(bTexes[0].source),
-      type: "f32",
-    };
-    resources.waveUniforms.bTex2AR = {
-      value: getAspectRatio(bTexes[0].source),
-      type: "f32",
-    };
-  } else if (bTexes.length == 2) {
-    resources["bTex1"] = bTexes[0].source;
-    resources["bTex2"] = bTexes[1].source;
-
-    resources.waveUniforms.bTex1AR = {
-      value: getAspectRatio(bTexes[0].source),
-      type: "f32",
-    };
-    resources.waveUniforms.bTex2AR = {
-      value: getAspectRatio(bTexes[1].source),
-      type: "f32",
-    };
-  } else if (bTexes.length > 2) {
-    console.error(" > 2 Images Not Supported ");
-  } else console.log(" Currently " + bTexes.length + "Number of Images ");
-
   const shader = Shader.from({
     gl,
     resources,
@@ -189,7 +146,14 @@ export async function shaderRendering() {
 }
 
 function createResources() {
+  const graphics = [sv.iconAtlas.canvas];
+
+  const textures = graphics.map(
+    (canvas) => new Texture({ source: new ImageSource({ resource: canvas }) })
+  );
+
   const commonResources = {
+    atlasTex: textures[0].source,
     waveUniforms: {
       time: { value: 1.0, type: "f32" },
       vTime: { value: 1.0, type: "f32" },
@@ -204,53 +168,9 @@ function createResources() {
       vColCount: { value: sv.colCount, type: "f32" },
       vNoisyMin: { value: sv.noisyMin, type: "f32" },
       vNoisyMax: { value: sv.noisyMax, type: "f32" },
+      iconAR: { value: 1.0, type: "f32" },
     },
   };
 
-  const graphics = sv.oneActiveImage
-    ? [sv.iconAtlas.canvas]
-    : [
-        sv.customShapeGraphics.canvas,
-        sv.circleGraphicLeft.canvas,
-        sv.circleGraphicRight.canvas,
-      ];
-
-  const textures = graphics.map(
-    (canvas) => new Texture({ source: new ImageSource({ resource: canvas }) })
-  );
-
-  // Mode-specific textures
-  const modeSpecificTextures =
-    sv.oneActiveImage === true
-      ? {
-          atlasTex: textures[0].source,
-          waveUniforms: {
-            iconAR: { value: 1.0, type: "f32" },
-          },
-        }
-      : (() => {
-          const [art1, art2, art3] = textures.map((tex) =>
-            sv.p.int(tex.source.width / tex.source.height)
-          );
-          return {
-            hourglassTex: textures[0].source,
-            leftCircleTex: textures[1].source,
-            rightCircleTex: textures[2].source,
-            waveUniforms: {
-              hgAR: { value: art1, type: "f32" },
-              lcAR: { value: art2, type: "f32" },
-              rcAR: { value: art3, type: "f32" },
-            },
-          };
-        })();
-
-  // Merge common and specific resources
-  return {
-    ...commonResources,
-    ...modeSpecificTextures,
-    waveUniforms: {
-      ...commonResources.waveUniforms,
-      ...modeSpecificTextures.waveUniforms,
-    },
-  };
+  return commonResources;
 }

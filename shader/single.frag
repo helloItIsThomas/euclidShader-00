@@ -3,11 +3,6 @@ precision highp float;
 in vec2 vUV;
 in float vIndex;
 
-in float debugF0;
-in float debugF1;
-in vec2 debugV0;
-in vec2 debugV1;
-
 uniform float rowCount;
 uniform float colCount;
 uniform sampler2D atlasTex;

@@ -8,18 +8,12 @@ uniform float vColCount;
 uniform float vTime;
 uniform float vNoisyMin;
 uniform float vNoisyMax;
-uniform sampler2D bTex1;
-uniform sampler2D bTex2;
 
 uniform float vCellW;
 uniform float vCellH;
 
 out vec2 vUV;
 out float vIndex;
-out float debugF0;
-out float debugF1;
-out vec2 debugV0;
-out vec2 debugV1;
 
 uniform mat3 uProjectionMatrix;
 uniform mat3 uWorldTransformMatrix;
@@ -61,7 +55,4 @@ void main() {
 
     vUV = aUV;
     vIndex = aIndex;
-    debugF0 = scale;
-    debugV0 = aPosition;
-    debugV1 = aPositionOffset;
 }
