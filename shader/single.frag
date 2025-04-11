@@ -5,7 +5,8 @@ in float vIndex;
 
 uniform float rowCount;
 uniform float colCount;
-uniform sampler2D atlasTex;
+
+uniform sampler2D sourceTex;
 
 void main() {
 
@@ -23,5 +24,5 @@ void main() {
 
     vec2 test = vec2(unitW + x, unitH + y);
 
-    gl_FragColor = texture2D(atlasTex, test);
+    gl_FragColor = texture2D(sourceTex, test);
 }

@@ -2,7 +2,6 @@ import { sv } from "../utils/variables.js";
 import { Still } from "./Stills.js";
 import { shaderRendering } from "../rendering/shaderRendering.js";
 import { createGraphicsForSingleImage } from "../rendering/createShapeGraphics.js";
-import { hideLoadIcon } from "../utils/icons.js";
 
 export async function updateCellData(_processedImgs) {
   sv.stills = [];
@@ -30,6 +29,5 @@ export async function updateCellData(_processedImgs) {
     await shaderRendering();
 
     sv.workerDone = true;
-    hideLoadIcon();
   });
 }

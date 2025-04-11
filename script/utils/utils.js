@@ -109,34 +109,3 @@ function showUserWarning(message) {
     warningEl.style.display = "none";
   }, 5000);
 }
-
-function sendBugReport(message, source, lineno, colno, error) {
-  console.log("sendBugReport");
-  const bugReport = {
-    browserInfo: navigator.userAgent,
-    message: message,
-    source: source,
-    lineno: lineno,
-    colno: colno,
-    error: error,
-    parameters: {
-      recordDuration: sv.recordDuration,
-      gridResolution: sv.gridResolution,
-      cellW: sv.cellW,
-      cellH: sv.cellH,
-      speed: sv.speed,
-      color: sv.color,
-      manualScale: sv.manualScale,
-      noiseOffset: sv.noiseOffset,
-      snappiness: sv.snappiness,
-      tlThresh1: sv.tlThresh1,
-      tlThresh2: sv.tlThresh2,
-      tlThresh3: sv.tlThresh3,
-      totalSourceUploadNum: sv.totalSourceUploadNum,
-      clipDarkOutliers: sv.clipDarkOutliers,
-      clipLightOutliers: sv.clipLightOutliers,
-      scaleDynamically: sv.scaleDynamically,
-      startInvisible: sv.startInvisible,
-    },
-  };
-}

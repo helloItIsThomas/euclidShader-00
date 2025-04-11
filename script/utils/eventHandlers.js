@@ -35,59 +35,6 @@ export async function recalculateGrid(resizeTo = "bodyRight") {
   return imgs;
 }
 
-// export async function updateActiveImgBar() {
-//   // set oneActiveImage flag here
-//   if (sv.totalSourceUploadNum == 1) {
-//     sv.oneActiveImage = true;
-//     sv.advanced.show();
-//   } else if (sv.totalSourceUploadNum > 1) {
-//     sv.oneActiveImage = false;
-//     sv.advanced.hide();
-//   } else throw console.error("Less than 1 active image detected");
-
-//   // get the background images
-//   const imgs = sv.animUnderImgs;
-
-//   // clear the preview bar
-//   // const previewBar = document.getElementById("activeImages");
-//   // while (previewBar.firstChild) {
-//   // previewBar.removeChild(previewBar.firstChild);
-//   // }
-
-//   // make a copy of each background image and put it in previewBar.
-//   // resizing for these is happening automatically with css.
-//   imgs.forEach((img, index) => {
-//     const previewImg = sv.p.createImage(img.width, img.height);
-//     previewImg.copy(
-//       img,
-//       0,
-//       0,
-//       img.width,
-//       img.height,
-//       0,
-//       0,
-//       img.width,
-//       img.height
-//     );
-//     const previewCanvas = Object.assign(document.createElement("canvas"), {
-//       width: previewImg.width,
-//       height: previewImg.height,
-//       id: `${index}`,
-//     });
-//     previewCanvas.getContext("2d").drawImage(previewImg.canvas, 0, 0);
-//     // Find the correct position to insert the canvas
-//     // const existingCanvases = previewBar.children;
-//     // let insertPosition = index;
-
-//     // Insert at the correct position or append if it's the last element
-//     // if (insertPosition < existingCanvases.length) {
-//     // previewBar.insertBefore(previewCanvas, existingCanvases[insertPosition]);
-//     // } else {
-//     // previewBar.appendChild(previewCanvas);
-//     // }
-//   });
-// }
-
 let resizeTimeout;
 let resizingStarted = false;
 

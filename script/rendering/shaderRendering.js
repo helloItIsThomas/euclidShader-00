@@ -153,7 +153,7 @@ function createResources() {
   );
 
   const commonResources = {
-    atlasTex: textures[0].source,
+    sourceTex: textures[0].source,
     waveUniforms: {
       time: { value: 1.0, type: "f32" },
       vTime: { value: 1.0, type: "f32" },

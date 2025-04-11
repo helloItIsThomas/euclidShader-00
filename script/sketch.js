@@ -9,7 +9,7 @@ import { sv } from "./utils/variables.js";
 import { recalculateGrid } from "./utils/eventHandlers.js";
 import { loadSetupImages, updateSvgIcons } from "./utils/loadImages";
 import { draw } from "./rendering/draw.js";
-import { stopRecording } from "./utils/recording";
+
 import { updateCellData } from "./imgProcessing/imageProcessing.js";
 
 let resizeAppToMe = document.getElementById("bodyRight");
@@ -80,7 +80,6 @@ export const tick = async () => {
   });
 
   if (sv.frame >= sv.recordDuration * sv.frameRate) {
-    await stopRecording();
     sv.frame = 0;
   }
 
