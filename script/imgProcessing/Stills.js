@@ -7,7 +7,7 @@ export class Still {
     this.cells = [];
   }
 
-  populateGridWithWorker(image) {
+  calculateCells(image) {
     const originalW = image.width;
     const originalH = image.height;
 
@@ -18,19 +18,11 @@ export class Still {
     thisCtx.drawImage(image.canvas, 0, 0, originalW, originalH);
 
     return new Promise((resolve, reject) => {
-      // const worker = new Worker(
-      // new URL("/script/workers/populateWorker.js", import.meta.url),
-      // { type: "module" }
-      // );
-
       const rowCount = sv.rowCount;
       const colCount = sv.colCount;
       const cellW = originalW / colCount;
       const cellH = originalH / rowCount;
 
-      // worker.postMessage({ rowCount, colCount, cellW, cellH });
-
-      // // // // //
       this.cells = [];
 
       for (let y = 0; y < rowCount; y++) {
@@ -50,20 +42,6 @@ export class Still {
       }
 
       resolve();
-
-      // const result = {
-      // cells,
-      // };
-      // // // // // // //
-
-      // worker.onmessage = (e) => {
-      // this.cells = e.data.cells;
-      // resolve();
-      // };
-      // worker.onerror = (e) => {
-      // reject();
-      // console.error("Worker error:", e.message, e);
-      // };
     });
   }
 }

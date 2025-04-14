@@ -12,7 +12,7 @@ export async function updateCellData(_processedImgs) {
     still.processedImage = image;
 
     promises.push(
-      still.populateGridWithWorker(image).then(() => {
+      still.calculateCells(image).then(() => {
         still.currentImageIndex = i;
         sv.stills.push(still);
       })
