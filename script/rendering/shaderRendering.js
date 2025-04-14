@@ -44,11 +44,9 @@ export async function shaderRendering() {
   const offsetHeight = sv.pApp.renderer.height * 0.5 - sv.gridH * 0.5;
 
   for (let i = 0; i < sv.totalTriangles; i++) {
-    // assuming the grid of both images is the same...
     const cell = sv.stills[0].cells[i];
     sv.triangles[i] = {
-      // x: cell.x,
-      // y: cell.y,
+      // offsetWidth and offsetHeight center it on the canvas.
       x: cell.x + offsetWidth,
       y: cell.y + offsetHeight,
       speed: 1.0,
@@ -81,30 +79,8 @@ export async function shaderRendering() {
     indexBuffer: [0, 1, 2, 0, 2, 3],
   });
 
-  //// WIP WIP WIP WIP WIP WIP
-
-  if (sv.noiseCanvasGraphic) {
-    sv.noiseCanvasGraphic.remove();
-    sv.noiseCanvasGraphic = undefined;
-  }
-
-  const noiseCanvas = sv.p.createGraphics(sv.colCount, sv.rowCount);
-  sv.noiseCanvasGraphic = noiseCanvas;
-
-  let n = 0;
-  sv.noisyValues = [];
-  for (let y = 0; y < sv.rowCount; y++) {
-    for (let x = 0; x < sv.colCount; x++) {
-      const noisyValue = sv.p.noise(n);
-      sv.noisyValues.push(noisyValue);
-      sv.noisyMax = sv.p.max(sv.noisyMax, noisyValue);
-      sv.noisyMin = sv.p.min(sv.noisyMin, noisyValue);
-      noiseCanvas.set(x, y, sv.p.color(noisyValue * 255));
-      n++;
-    }
-  }
-  noiseCanvas.updatePixels();
-  //// WIP WIP WIP WIP WIP WIP END END END END
+  sv.noisyMin = 0.0;
+  sv.noisyMax = 1.0;
 
   let resources = {};
   if (resources) {
@@ -163,9 +139,9 @@ function createResources() {
       cellH: { value: sv.cellH, type: "f32" },
       gridResolution: { value: sv.gridResolution, type: "f32" },
       rowCount: { value: sv.rowCount, type: "f32" },
-      colCount: { value: sv.colCount, type: "f32" },
+      colCount: { value: 1.0, type: "f32" },
       vRowCount: { value: sv.rowCount, type: "f32" },
-      vColCount: { value: sv.colCount, type: "f32" },
+      vColCount: { value: 1.0, type: "f32" },
       vNoisyMin: { value: sv.noisyMin, type: "f32" },
       vNoisyMax: { value: sv.noisyMax, type: "f32" },
       iconAR: { value: 1.0, type: "f32" },

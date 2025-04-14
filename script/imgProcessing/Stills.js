@@ -18,29 +18,52 @@ export class Still {
     thisCtx.drawImage(image.canvas, 0, 0, originalW, originalH);
 
     return new Promise((resolve, reject) => {
-      const worker = new Worker(
-        new URL("/script/workers/populateWorker.js", import.meta.url),
-        { type: "module" }
-      );
-
-      const imageData = thisCtx.getImageData(0, 0, originalW, originalH);
+      // const worker = new Worker(
+      // new URL("/script/workers/populateWorker.js", import.meta.url),
+      // { type: "module" }
+      // );
 
       const rowCount = sv.rowCount;
       const colCount = sv.colCount;
       const cellW = originalW / colCount;
       const cellH = originalH / rowCount;
 
-      worker.postMessage({ imageData, rowCount, colCount, cellW, cellH });
+      // worker.postMessage({ rowCount, colCount, cellW, cellH });
 
-      worker.onmessage = (e) => {
-        this.cells = e.data.cells;
-        console.log(e.data);
-        resolve();
-      };
-      worker.onerror = (e) => {
-        reject();
-        console.error("Worker error:", e.message, e);
-      };
+      // // // // //
+      this.cells = [];
+
+      for (let y = 0; y < rowCount; y++) {
+        for (let x = 0; x < colCount; x++) {
+          const xPos = x * cellW;
+          const yPos = y * cellH;
+
+          // Populate cell object
+          this.cells.push({
+            gridIndex: y * colCount + x,
+            x: xPos,
+            y: yPos,
+            width: cellW,
+            height: cellH,
+          });
+        }
+      }
+
+      resolve();
+
+      // const result = {
+      // cells,
+      // };
+      // // // // // // //
+
+      // worker.onmessage = (e) => {
+      // this.cells = e.data.cells;
+      // resolve();
+      // };
+      // worker.onerror = (e) => {
+      // reject();
+      // console.error("Worker error:", e.message, e);
+      // };
     });
   }
 }

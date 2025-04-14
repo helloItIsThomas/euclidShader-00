@@ -4,6 +4,7 @@ import { fitImageToWindow, downloadCanvas } from "../utils/utils.js";
 import { gsap } from "gsap";
 
 export async function recalculateGrid(resizeTo = "bodyRight") {
+  console.log("recalculating grid");
   let _imgs = Array.isArray(sv.animUnderImgs)
     ? sv.animUnderImgs
     : [sv.animUnderImgs];
@@ -40,12 +41,7 @@ let resizingStarted = false;
 window.addEventListener("resize", () => {
   clearTimeout(resizeTimeout);
 
-  if (!resizingStarted) {
-    resizingStarted = true;
-    // gsap.to("#pixiApp", { opacity: 0, duration: 0.1 });
-
-    gsap.to("#bodyRight", { opacity: 0, duration: 0.1 });
-  }
+  if (!resizingStarted) resizingStarted = true;
 
   resizeTimeout = setTimeout(async () => {
     const passMeImgs = await recalculateGrid();
