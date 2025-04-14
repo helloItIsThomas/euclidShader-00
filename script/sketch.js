@@ -1,15 +1,12 @@
 import "p5.js-svg";
-
 import gsap from "gsap";
 import * as PIXI from "pixi.js";
 import { Application, Ticker } from "pixi.js";
 import { Recorder, RecorderStatus, Encoders } from "canvas-record";
-
 import { sv } from "./utils/variables.js";
 import { recalculateGrid } from "./utils/eventHandlers.js";
 import { loadSetupImages } from "./utils/loadImages";
 import { draw } from "./rendering/draw.js";
-
 import { updateCellData } from "./imgProcessing/imageProcessing.js";
 
 let resizeAppToMe = document.getElementById("bodyRight");
@@ -63,21 +60,6 @@ export const tick = async () => {
   if (sv.canvasRecorder.status !== RecorderStatus.Recording) return;
 
   await sv.canvasRecorder.step();
-
-  const currentIcon = Math.floor(
-    (sv.frame / sv.recordDuration / sv.frameRate) * 6
-  );
-
-  const progressIcons = document.getElementsByClassName(
-    "renderingBarProgressSubIcons"
-  );
-
-  Array.from(progressIcons).forEach((icon, index) => {
-    icon.style.display = "none";
-    if (index <= currentIcon) {
-      icon.style.display = "block";
-    }
-  });
 
   if (sv.frame >= sv.recordDuration * sv.frameRate) {
     sv.frame = 0;

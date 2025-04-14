@@ -33,9 +33,8 @@ export class Still {
       worker.postMessage({ imageData, rowCount, colCount, cellW, cellH });
 
       worker.onmessage = (e) => {
-        const result = e.data;
-        this.cells = result.cells;
-
+        this.cells = e.data.cells;
+        console.log(e.data);
         resolve();
       };
       worker.onerror = (e) => {
