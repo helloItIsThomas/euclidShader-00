@@ -28,7 +28,6 @@ export const sv = {
   instancePositionBuffer: null,
   totalTriangles: null,
   triangles: null,
-  iconAtlas: null,
   spritesheet: null,
   sSheetTextures: [],
   sheets: [],

@@ -122,7 +122,12 @@ export async function shaderRendering() {
 }
 
 function createResources() {
-  const graphics = [sv.iconAtlas.canvas];
+  let sourceTexResW = 600;
+  let sourceTexResH = 600;
+  const pg = sv.p.createGraphics(sourceTexResW, sourceTexResH);
+  sv.createGraphicsForSingleImageGraphic = pg;
+  pg.image(sv.animUnderImgs[0], 0, 0, sourceTexResW, sourceTexResH);
+  const graphics = [pg.canvas];
 
   const textures = graphics.map(
     (canvas) => new Texture({ source: new ImageSource({ resource: canvas }) })

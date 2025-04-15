@@ -7,7 +7,7 @@ export class Still {
     this.cells = [];
   }
 
-  calculateCells(image) {
+  populateGridWithWorker(image) {
     const originalW = image.width;
     const originalH = image.height;
 

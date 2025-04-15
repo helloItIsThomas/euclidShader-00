@@ -57,10 +57,6 @@ export const tick = async () => {
 
   sv.clock = sv.frame * sv.speed;
 
-  if (sv.canvasRecorder.status !== RecorderStatus.Recording) return;
-
-  await sv.canvasRecorder.step();
-
   if (sv.frame >= sv.recordDuration * sv.frameRate) {
     sv.frame = 0;
   }

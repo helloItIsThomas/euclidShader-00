@@ -1,7 +1,6 @@
 import { sv } from "../utils/variables.js";
 import { Still } from "./Stills.js";
 import { shaderRendering } from "../rendering/shaderRendering.js";
-import { createGraphicsForSingleImage } from "../rendering/createShapeGraphics.js";
 
 export async function updateCellData(_processedImgs) {
   sv.stills = [];
@@ -22,10 +21,6 @@ export async function updateCellData(_processedImgs) {
   sv.oneActiveImage = true;
 
   await Promise.all(promises).then(async () => {
-    if (sv.oneActiveImage === true) {
-      sv.iconAtlas = createGraphicsForSingleImage();
-    } else throw new Error("No valid images loaded");
-
     await shaderRendering();
 
     sv.workerDone = true;
